@@ -982,7 +982,7 @@ usage(void)
 	fputs("usage: dmenu [-bfiv] [-l lines] [-p prompt] [-fn font] [-m monitor]\n"
 	      "             [-nb color] [-nf color] [-sb color] [-sf color]\n"
 	      "             [-nhb color] [-nhf color] [-shb color] [-shf color] [-w windowid]\n"
-	      "             [-dy command]\n", stderr);
+	      "             [-it text] [-dy command]\n", stderr);
 	exit(1);
 }
 
@@ -1041,6 +1041,10 @@ main(int argc, char *argv[])
 			colors[SchemeSelHighlight][ColFg] = argv[++i];
 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
 			embed = argv[++i];
+		else if (!strcmp(argv[i], "-it")) {   /* embedding window id */
+			const char * text = argv[++i];
+			insert(text, strlen(text));
+		}
 		else if (!strcmp(argv[i], "-dy"))  /* dynamic command to run */
 			dynamic = argv[++i] && *argv[i] ? argv[i] : NULL;
 		else if (!strcmp(argv[i], "-bw"))
